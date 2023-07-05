@@ -1,7 +1,3 @@
 python-dotenv
-requests
 pydub
 spotipy
-openai
-tiktoken
-youtube_dl

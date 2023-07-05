@@ -36,4 +36,5 @@ def summarize(podcast_url):
     print(f'Completed summarization for ({podcast_url})')
     
 #summarize("https://open.spotify.com/episode/0YqflJb8Wco8IDdGHPNTu8")
-summarize("https://open.spotify.com/episode/46deyZlBRfOvcSzT9NO10r?si=9cb4bc644b024e3b")
+#summarize("https://open.spotify.com/episode/46deyZlBRfOvcSzT9NO10r?si=9cb4bc644b024e3b")
+summarize("https://open.spotify.com/episode/1Beb93JHF0RtSdTfPwFYVK?si=bbe1aa65d22d4be9")
