@@ -1,6 +1,5 @@
 
-COMMON_WORDS_FILE = "assets/top_1000_french_words.csv"
-
+import config
 
 def get_words_in_transcript():
     # Temporary test func
@@ -13,7 +12,7 @@ def get_words_in_transcript():
 
 def get_common_wordlist():
     # TODO - should ideally be able to account for plurals, feminine forms, verb conjugations
-    with open(COMMON_WORDS_FILE, "r") as f:
+    with open(config.COMMON_WORDS_FILE, "r") as f:
         wordlist_raw = f.readlines()
         wordlist = list(map(lambda x: x.strip(), wordlist_raw))
     return wordlist
