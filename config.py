@@ -1,5 +1,8 @@
 import os
 from dotenv import load_dotenv
+from pathlib import Path 
+
+
 
 load_dotenv()
 
@@ -8,8 +11,14 @@ SPOTIFY_CLIENT_ID =  os.getenv("SPOTIFY_CLIENT_ID")
 SPOTIFY_CLIENT_SECRET =  os.getenv("SPOTIFY_CLIENT_SECRET")
 OPENAI_API_KEY =  os.getenv("OPENAI_API_KEY")
 
-# Filenames
-OUTPUT = ['downloads']
+# Filename config
+OUTPUT = Path("outputs")
+
+
+WAV_FOLDERPATH = OUTPUT / "audio_wav_files"
+
+
+#WAV_FOLDERPATH = OUTPUT + "/" + WAV_FOLDERNAME
 PODCAST_FILENAME_BASE = "french_podcast"
 PODCAST_FILENAME_MP3 = PODCAST_FILENAME_BASE + ".mp3" 
 PODCAST_FILENAME_WAV = PODCAST_FILENAME_BASE + ".wav"
