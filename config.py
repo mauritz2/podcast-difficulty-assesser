@@ -12,17 +12,12 @@ OPENAI_API_KEY =  os.getenv("OPENAI_API_KEY")
 # Transcription config
 PODCAST_LANGUAGE = "fr-FR"
 
-# Filename config
+# Output file paths
 OUTPUT = Path("outputs")
+WAV_FOLDERPATH = OUTPUT / "wav_files"
+MP3_FOLDERPATH = OUTPUT / "mp3_files"
+TRANSCRIPT_FOLDERPATH = OUTPUT / "transcripts"
 
-
-WAV_FOLDERPATH = OUTPUT / "audio_wav_files"
-
+# Asset file paths
 COMMON_WORDS_FILE = "assets/top_1000_french_words.csv"
 FRENCH_PODCAST_FILE = "assets/french_podcasts.csv"
-
-# TODO - Remove?
-PODCAST_FILENAME_BASE = "french_podcast"
-PODCAST_FILENAME_MP3 = PODCAST_FILENAME_BASE + ".mp3" 
-PODCAST_FILENAME_WAV = PODCAST_FILENAME_BASE + ".wav"
-PODCAST_FILENAME_TRANSCRIPT = PODCAST_FILENAME_BASE + "_transcript.txt"

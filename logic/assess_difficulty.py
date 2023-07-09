@@ -1,4 +1,3 @@
-
 import config
 
 def get_words_in_transcript():
