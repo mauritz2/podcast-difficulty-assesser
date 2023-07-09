@@ -2,8 +2,6 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path 
 
-
-
 load_dotenv()
 
 # Spotify credentials
@@ -11,17 +9,20 @@ SPOTIFY_CLIENT_ID =  os.getenv("SPOTIFY_CLIENT_ID")
 SPOTIFY_CLIENT_SECRET =  os.getenv("SPOTIFY_CLIENT_SECRET")
 OPENAI_API_KEY =  os.getenv("OPENAI_API_KEY")
 
+# Transcription config
+PODCAST_LANGUAGE = "fr-FR"
+
 # Filename config
 OUTPUT = Path("outputs")
 
 
 WAV_FOLDERPATH = OUTPUT / "audio_wav_files"
 
-PODCAST_LANGUAGE = "fr-FR"
+COMMON_WORDS_FILE = "assets/top_1000_french_words.csv"
+FRENCH_PODCAST_FILE = "assets/french_podcasts.csv"
 
-#WAV_FOLDERPATH = OUTPUT + "/" + WAV_FOLDERNAME
+# TODO - Remove?
 PODCAST_FILENAME_BASE = "french_podcast"
 PODCAST_FILENAME_MP3 = PODCAST_FILENAME_BASE + ".mp3" 
 PODCAST_FILENAME_WAV = PODCAST_FILENAME_BASE + ".wav"
 PODCAST_FILENAME_TRANSCRIPT = PODCAST_FILENAME_BASE + "_transcript.txt"
-COMMON_WORDS_FILE = "assets/top_1000_french_words.csv"

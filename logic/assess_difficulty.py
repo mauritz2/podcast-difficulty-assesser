@@ -19,6 +19,8 @@ def get_common_wordlist():
 
 
 def assess_degree_of_uncommon_words(transcript_words:str, wordlist:list[str]):
+    wordlist = get_common_wordlist()
+    
     total_words = len(transcript_words)
     uncommon_words = 0
 
@@ -30,9 +32,9 @@ def assess_degree_of_uncommon_words(transcript_words:str, wordlist:list[str]):
     return pct_uncommon_words
 
      
-wordlist = get_common_wordlist()
-transcript = get_words_in_transcript()
+#wordlist = get_common_wordlist()
+#transcript = get_words_in_transcript()
 
-pct_uncommon_words = assess_degree_of_uncommon_words(transcript, wordlist)
+#pct_uncommon_words = assess_degree_of_uncommon_words(transcript, wordlist)
 
-print(pct_uncommon_words)
+#print(pct_uncommon_words)

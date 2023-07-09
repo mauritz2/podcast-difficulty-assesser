@@ -19,6 +19,7 @@ def download_episode(podcast_url:str):
     podcast_name = episode.get("show").get("name")
     filename = podcast_name.lower().replace(" ", "_") + ".wav"
     
+    # Transform to .wav using AudioSegment before saving
     with open(filename, "wb") as f:
         f.write(response.content)
 

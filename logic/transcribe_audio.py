@@ -27,12 +27,9 @@ def generate_transcript(audio_filepath:str):
                 # TODO: Add so it saves to output files, creating if if it doesn't exist
                 with open(transcript_name, 'w', encoding="utf8") as output_file:
                         json.dump(transcript_dict, output_file, ensure_ascii=False)
-
+                print("JSON saving complete")
 
 def get_list_of_wav_files():
         files_in_folder = os.listdir(config.WAV_FOLDERPATH)
         wav_files = [f for f in files_in_folder if f[-3:] == "wav"]
         return wav_files
-
-
-generate_all_transcripts()

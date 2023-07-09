@@ -1,26 +1,31 @@
+import config
+from logic import download_audio as download
+from logic import transcribe_audio as transcribe
+from logic import assess_difficulty as difficulty
+
+
+def get_podcast_urls():
+    # TODO - this func is very slow - refactor
+    with open(config.FRENCH_PODCAST_FILE, "r") as f:
+        raw_data = f.readlines()
+    podcast_urls = [f.strip() for f in raw_data]
+    return podcast_urls
+
+if __name__ == "__main__":
+    podcast_urls = get_podcast_urls()
+
+    # TODO - build check if episode already exists - if so skip it
+    for url in podcast_urls:
+        # TODO - update so it saves in the right asset folder
+        download.download_episode(url)
+    
+    # TODO - build same check here - skip if transcript exists
+    # Maybe make a flag to force overwrite if needed
+    transcribe.generate_all_transcripts()
 
 
 # For each list in list of French podcast URLs
 # Download the audio to the download folder - if the name doesn't already exist
-
-# Transcriber
-    # init(folder)
-    # Instantiate with a folder with .WAV
-    # Loop through WAVs and load .wav from disk
-    # Save transcription as JSON
-    # Name, length, URL, 
-    
-# DifficultyAssesser
-    # Take folder name of JSONs as input
-    # Load transcrtip JSON from folder
-    # Assess difficulty metrics
-    # Add difficulty metrics to the JSON
-
-# SpotifyDownloader
-    # Download episode from Spotify
-    # Save audio files (turn to WAV before saving)
-    # Error handling for downloadings
-    # Get the podcast name and use that as file name
 
 # create output directories if they don't exist
 #for dir in config.OUTPUT:
