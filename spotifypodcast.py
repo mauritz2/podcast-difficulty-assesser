@@ -19,7 +19,8 @@ class SpotifyPodcast:
         # Download the audio preview file
         audio_url = episode["audio_preview_url"]
         response = requests.get(audio_url)
+        # Fix weird signs in JSON
         with open(filename, "wb") as f:
             f.write(response.content)
-                    
+
         return filename

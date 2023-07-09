@@ -22,3 +22,7 @@
     # Error handling for downloadings
     # Get the podcast name and use that as file name
 
+# create output directories if they don't exist
+#for dir in config.OUTPUT:
+#    if not os.path.exists(dir):
+#        os.makedirs(dir)
