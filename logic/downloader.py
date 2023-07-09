@@ -40,5 +40,3 @@ def convert_mp3s_to_wavs():
          new_name = mp3[:-3] + "wav"
          sound = AudioSegment.from_mp3(config.MP3_FOLDERPATH / mp3)
          sound.export(config.WAV_FOLDERPATH / new_name, format="wav")
-
-#download_episode("https://open.spotify.com/episode/1Beb93JHF0RtSdTfPwFYVK?si=bbe1aa65d22d4be9")

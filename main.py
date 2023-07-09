@@ -1,7 +1,7 @@
 import config
-from logic import download_audio as download
-from logic import transcribe_audio as transcribe
-from logic import assess_difficulty as difficulty
+from logic import downloader
+from logic import transcriber
+from logic import evaluator
 
 
 def get_podcast_urls():
@@ -21,7 +21,10 @@ if __name__ == "__main__":
     #download.convert_mp3s_to_wavs()
     # TODO - build same check here - skip if transcript exists
     # Maybe make a flag to force overwrite if needed
-    transcribe.generate_all_transcripts()
+    #transcriber.generate_all_transcript_jsons()
+    evaluator.add_uncommon_words_to_jsons()
+    #difficulty.add_talking_speed_to_jsons()
+
 
 
 # create output directories if they don't exist
