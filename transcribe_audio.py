@@ -2,7 +2,6 @@ import os
 import config
 import json
 import speech_recognition as sr
-from pydub import AudioSegment
 
 r = sr.Recognizer()
 
@@ -20,7 +19,7 @@ def generate_transcript(audio_filepath:str):
                 audio = r.record(source)
                 audio_length = int(source.DURATION)
                 
-                transcript = r.recognize_google(audio, language="fr-FR")
+                transcript = r.recognize_google(audio, language=config.PODCAST_LANGUAGE)
                 transcript_name = audio_filepath[:-3] + "_transcript.json"
                 
                 transcript_dict["transcript"] = transcript

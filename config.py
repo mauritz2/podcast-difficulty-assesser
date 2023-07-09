@@ -17,6 +17,7 @@ OUTPUT = Path("outputs")
 
 WAV_FOLDERPATH = OUTPUT / "audio_wav_files"
 
+PODCAST_LANGUAGE = "fr-FR"
 
 #WAV_FOLDERPATH = OUTPUT + "/" + WAV_FOLDERNAME
 PODCAST_FILENAME_BASE = "french_podcast"
