@@ -13,6 +13,12 @@ def download_episode(podcast_url:str):
     parsed_url = urllib.parse.urlparse(podcast_url)
     podcast_id = parsed_url.path.split("/")[-1]    
     # Download the audio preview file
+    # TODO - build check if episode already exists - if so skip it
+    # create output directories if they don't exist
+    #for dir in config.OUTPUT:
+    #    if not os.path.exists(dir):
+    #        os.makedirs(dir)
+
     episode = sp.episode(podcast_id, market="US")
     audio_url = episode["audio_preview_url"]
     response = requests.get(audio_url)
@@ -22,9 +28,10 @@ def download_episode(podcast_url:str):
     filename = podcast_name.lower().replace(" ", "_") + ".mp3"
     filepath = config.MP3_FOLDERPATH / filename
 
-    # Transform to .wav using AudioSegment before saving
     with open(filepath, "wb") as f:
         f.write(response.content)
+
+    print(f"MP3 saved at {filepath}")
 
 
 def get_authenticated_spotipy():
@@ -40,3 +47,5 @@ def convert_mp3s_to_wavs():
          new_name = mp3[:-3] + "wav"
          sound = AudioSegment.from_mp3(config.MP3_FOLDERPATH / mp3)
          sound.export(config.WAV_FOLDERPATH / new_name, format="wav")
+    print(f"MP3 converted to WAV and saved at {config.WAV_FOLDERPATH / new_name}")
+

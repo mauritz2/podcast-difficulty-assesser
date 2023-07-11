@@ -20,9 +20,7 @@ def get_common_wordlist():
 
 
 def calculate_pct_uncommon_words(transcript_words:list[str], wordlist:list[str]):
-    # TODO - should ideally be able to account for plurals, feminine forms, verb conjugations
-    #wordlist = get_common_wordlist()
-    
+    # TODO - should ideally be able to account for plurals, feminine forms, verb conjugations  
     total_words = len(transcript_words)
     uncommon_words = 0
 
@@ -30,7 +28,7 @@ def calculate_pct_uncommon_words(transcript_words:list[str], wordlist:list[str])
         if word not in wordlist:
             uncommon_words += 1
     
-    pct_uncommon_words = uncommon_words / total_words
+    pct_uncommon_words = round(uncommon_words / total_words, 3)
     return pct_uncommon_words
 
 
@@ -41,9 +39,29 @@ def add_uncommon_words_to_jsons():
     for filename in filenames:
         words = get_transcript_words(filename)
         pct_uncommon = calculate_pct_uncommon_words(words, wordlist)
-        # TODO - continue here by writing result to JSON
+        with open(config.TRANSCRIPT_FOLDERPATH / filename, "r") as f:
+            transcript = json.load(f)
+        with open(config.TRANSCRIPT_FOLDERPATH / filename, "w", encoding="utf8") as updated_json:
+            transcript["pct_uncommon_words"] = pct_uncommon
+            json.dump(transcript, updated_json, ensure_ascii=False)
+        print(f"Amount of uncommon words for {filename}: {pct_uncommon}")
 
-
+def add_words_per_min_to_jsons():
+    # TODO - reduce duplication with add_uncommon_words_to_json()
+    filenames = get_all_transcript_jsons()
+    for filename in filenames:
+        with open(config.TRANSCRIPT_FOLDERPATH / filename, "r") as f:
+            transcript_json = json.load(f)
+        
+        audio_length = transcript_json["audio_length"]
+        num_words = len(get_transcript_words(filename))
+        words_per_min = (num_words / audio_length) * 60
+        transcript_json["words_per_min"] = words_per_min
+        
+        with open(config.TRANSCRIPT_FOLDERPATH / filename, "w", encoding="utf8") as updated_json:
+            json.dump(transcript_json, updated_json, ensure_ascii=False)
+        print(f"Words per minute for {filename}: {words_per_min}")
+    
 def get_all_transcript_jsons():
     transcripts = get_files_of_type(config.TRANSCRIPT_FOLDERPATH, ".json")
     return transcripts
