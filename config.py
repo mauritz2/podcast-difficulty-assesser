@@ -19,5 +19,5 @@ MP3_FOLDERPATH = OUTPUT / "mp3_files"
 TRANSCRIPT_FOLDERPATH = OUTPUT / "transcripts"
 
 # Asset file paths
-COMMON_WORDS_FILE = "assets/top_1000_french_words.csv"
+COMMON_WORDS_FILE = "assets/top_1000_french_words_lem.csv"
 FRENCH_PODCAST_FILE = "assets/french_podcasts.csv"
