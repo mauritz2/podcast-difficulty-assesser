@@ -1,4 +1,5 @@
 import json
+import spacy
 
 import config
 from .utils import get_files_of_type
@@ -65,3 +66,15 @@ def add_words_per_min_to_jsons():
 def get_all_transcript_jsons():
     transcripts = get_files_of_type(config.TRANSCRIPT_FOLDERPATH, ".json")
     return transcripts
+
+
+def test_lemmetization():
+    words = get_common_wordlist()
+
+    # If does not exist - run "python3 -m spacy download fr_core_news_md"
+    nlp = spacy.load('fr_core_news_md')
+
+    #doc = nlp(u"voudrais non animaux yeux dors couvre.")
+    doc = nlp("madame confiné pendant quelques mois en 2020 les Français ont tu envie de pousser les murs de prendre l'air bisous aussi de pousser les meubles de changer de faire de la place au bureau à la maison et au télétravail cela s'est ressenti des 2021 avec une hausse des ventes de meubles de 14 % en un an le marché du meuble en France atteint alors 14 milliards d'euros hardcore avec un intérêt croissant pour le fabriqué en France une aubaine pour un spécialiste du confort le gros brochet je suis Pierrick failli vous écouter la story le podcast d'actualité de la rédaction des échos un programme à retrouver sur toutes les plateformes de téléchargement et 2 streaming abonnez-vous pour ne manquer requin épisode")
+    for token in doc:
+        print(token, token.lemma_)

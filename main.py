@@ -11,10 +11,11 @@ def get_podcast_urls():
     return podcast_urls
 
 if __name__ == "__main__":
-    podcast_urls = get_podcast_urls()
-    for url in podcast_urls:
-        downloader.download_episode(url)
-    downloader.convert_mp3s_to_wavs()
-    transcriber.generate_all_transcript_jsons()
-    evaluator.add_uncommon_words_to_jsons()
-    evaluator.add_words_per_min_to_jsons()
+    evaluator.test_lemmetization()
+    #podcast_urls = get_podcast_urls()
+    #for url in podcast_urls:
+    #    downloader.download_episode(url)
+    #downloader.convert_mp3s_to_wavs()
+    #transcriber.generate_all_transcript_jsons()
+    #evaluator.add_uncommon_words_to_jsons()
+    #evaluator.add_words_per_min_to_jsons()
