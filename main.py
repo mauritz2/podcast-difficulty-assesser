@@ -15,7 +15,7 @@ if __name__ == "__main__":
     for url in podcast_urls:
         downloader.download_episode(url)
     downloader.convert_mp3s_to_wavs()
-    # transcriber.generate_transcript()
-    #evaluator.add_uncommon_words_to_jsons()
-    #evaluator.add_words_per_min_to_jsons()
-    #printer.export_podcast_difficulty()
+    transcriber.generate_all_transcripts()
+    evaluator.add_uncommon_words_to_jsons()
+    evaluator.add_words_per_min_to_jsons()
+    printer.export_podcast_difficulty()

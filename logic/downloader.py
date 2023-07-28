@@ -55,14 +55,6 @@ def convert_mp3s_to_wavs():
          new_name = mp3[:-3] + "wav"
          sound = AudioSegment.from_mp3(config.MP3_FOLDERPATH / mp3)
          sound.export(config.WAV_FOLDERPATH / new_name, format="wav")
-    
-    add_value_to_json(config.TRANSCRIPT_FOLDERPATH / (new_name[:-4] + "_transcript.json"), "wav_filename", new_name)
+         add_value_to_json(config.TRANSCRIPT_FOLDERPATH / (new_name[:-4] + "_transcript.json"), "wav_filename", new_name)
     
     print(f"MP3 converted to WAV and saved at {config.WAV_FOLDERPATH / new_name}")
-
-
-#def generate_all_transcript_jsons():
-#        wav_files = get_files_of_type(config.WAV_FOLDERPATH, "wav")
-#        for filename in wav_files:
-#                #audio_filepath = config.WAV_FOLDERPATH / file_name
-#                generate_transcript_json(filename)
