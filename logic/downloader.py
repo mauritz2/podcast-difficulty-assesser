@@ -1,3 +1,4 @@
+import json
 import spotipy
 import requests
 import urllib.parse
@@ -26,13 +27,16 @@ def download_episode(podcast_url:str):
     # TODO make is so that the JSON is created already here containing the name
     podcast_name = episode.get("show").get("name")
     filename = podcast_name.lower().replace(" ", "_") + ".mp3"
-    filepath = config.MP3_FOLDERPATH / filename
+    mp3_filepath = config.MP3_FOLDERPATH / filename
 
-    with open(filepath, "wb") as f:
+    with open(mp3_filepath, "wb") as f:
         f.write(response.content)
+    print(f"MP3 saved at {mp3_filepath}")
 
-    print(f"MP3 saved at {filepath}")
-
+    json_filepath = config.TRANSCRIPT_FOLDERPATH / (filename + "_transcript.json")
+    with open(json_filepath, 'w', encoding="utf8") as output_file:
+        json.dump({"name":podcast_name}, output_file, ensure_ascii=False)
+    print(f"Transcript saved at {json_filepath}")
 
 def get_authenticated_spotipy():
        sp = spotipy.Spotify(
