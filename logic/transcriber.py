@@ -6,15 +6,14 @@ from .utils import get_files_of_type
 
 r = sr.Recognizer()
 
-def generate_all_transcript_jsons():
-        wav_files = get_files_of_type(config.WAV_FOLDERPATH, "wav")
-        for filename in wav_files:
-                #audio_filepath = config.WAV_FOLDERPATH / file_name
-                generate_transcript_json(filename)
+def generate_all_transcripts():
+        jsons = get_files_of_type(config.TRANSCRIPT_FOLDERPATH, "json")
+        for filename in jsons:
+                generate_transcript(filename)
 
-def generate_transcript_json(filename:str):
+def generate_transcript(filename:str):
         transcript_dict = {}
-        wav_filepath = str(config.WAV_FOLDERPATH / filename)
+        #wav_filepath = str(config.WAV_FOLDERPATH / filename)
         transcript_filepath = config.TRANSCRIPT_FOLDERPATH / (filename[:-4] + "_transcript.json") 
         with sr.AudioFile(wav_filepath) as source:         
                 audio = r.record(source)
