@@ -6,19 +6,19 @@ from spotipy.oauth2 import SpotifyClientCredentials
 from pydub import AudioSegment
 
 import config
-from .utils import get_files_of_type, add_value_to_json
+from .utils import get_files_of_type, add_value_to_json, get_value_from_json
+
 
 def download_episode(podcast_url:str):
+
+    if has_podcast_been_downloaded(podcast_url):
+        return 
+    
+    # TODO - redundant to make this call every download episode call
     sp = get_authenticated_spotipy()
 
     parsed_url = urllib.parse.urlparse(podcast_url)
     podcast_id = parsed_url.path.split("/")[-1]    
-    # Download the audio preview file
-    # TODO - build check if episode already exists - if so skip it
-    # create output directories if they don't exist
-    #for dir in config.OUTPUT:
-    #    if not os.path.exists(dir):
-    #        os.makedirs(dir)
 
     episode = sp.episode(podcast_id, market="US")
     audio_url = episode["audio_preview_url"]
@@ -37,10 +37,22 @@ def download_episode(podcast_url:str):
 
     json_filepath = config.TRANSCRIPT_FOLDERPATH / (filename + "_transcript.json")
 
-    json_dict = {"podcast_name":podcast_name, "mp3_filename":mp3_filename}
+    json_dict = {"podcast_name": podcast_name,
+                 "mp3_filename":mp3_filename,
+                 "podcast_url": podcast_url}
     with open(json_filepath, 'w', encoding="utf8") as output_file:
         json.dump(json_dict, output_file, ensure_ascii=False)
     print(f"Transcript saved at {json_filepath}")
+
+
+def has_podcast_been_downloaded(podcast_url:str):
+        jsons = get_files_of_type(config.TRANSCRIPT_FOLDERPATH, ".json")
+        for json in jsons:
+                podcast_url = get_value_from_json(config.TRANSCRIPT_FOLDERPATH / json, "podcast_url")
+                if podcast_url == podcast_url:
+                        return True
+        else:
+                return False
 
 def get_authenticated_spotipy():
        sp = spotipy.Spotify(
