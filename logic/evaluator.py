@@ -21,13 +21,17 @@ def get_common_wordlist():
 
 
 def calculate_pct_uncommon_words(transcript_words:list[str], wordlist:list[str]):
-    total_words = len(transcript_words)
+
+    # Filter out uppercase words since they are locations or names that will never be common words
+    lowercase_transcript_words = list(filter(lambda x: x.islower(), transcript_words)) 
+
+    total_words = len(lowercase_transcript_words)
     uncommon_words = 0
 
     # If does not exist - run "python3 -m spacy download fr_core_news_md"
     nlp = spacy.load("fr_core_news_md")
-    
-    for word in transcript_words:
+
+    for word in lowercase_transcript_words:
         doc = nlp(word)
         lemmatized_word = [token for token in doc][0].lemma_
         if lemmatized_word not in wordlist:
