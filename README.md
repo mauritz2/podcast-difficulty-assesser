@@ -4,6 +4,8 @@
 
 This script downloads a podcast audio sample from Spotify, converts the speech to text, and then estimates the difficulty metrics based on the transcripts. The purpose is to make it easier to find podcasts at the right difficulty level to improve oral comprehension.
 
+Context and example [output here](https://www.uddsten.com/2023/08/02/assessing-difficulty-of-french-podcasts/)
+
 **Prerequisites**
 1. Install packages in requirements.txt
 2. Create the output folders defined in config.py
