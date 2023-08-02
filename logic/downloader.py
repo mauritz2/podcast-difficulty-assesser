@@ -10,8 +10,10 @@ from .utils import get_files_of_type, add_value_to_json, get_value_from_json
 
 
 def download_episode(podcast_url:str):
+    # TODO - break out into smaller functions
 
     if has_podcast_been_downloaded(podcast_url):
+        print(f"Podcast {podcast_url} has already been downloaded")
         return 
     
     # TODO - redundant to make this call every download episode call
@@ -24,9 +26,7 @@ def download_episode(podcast_url:str):
     audio_url = episode["audio_preview_url"]
     response = requests.get(audio_url)
     
-    # TODO make is so that the JSON is created already here containing the name
-    podcast_name = episode.get("show").get("name")
-    
+    podcast_name = episode.get("show").get("name")    
     filename = podcast_name.lower().replace(":", "_").replace(" ", "_")
     mp3_filename = filename + ".mp3"
     mp3_filepath = config.MP3_FOLDERPATH / mp3_filename
@@ -38,6 +38,7 @@ def download_episode(podcast_url:str):
     json_filepath = config.TRANSCRIPT_FOLDERPATH / (filename + "_transcript.json")
 
     json_dict = {"podcast_name": podcast_name,
+                 "podcast_url": podcast_url,
                  "mp3_filename":mp3_filename,
                  "podcast_url": podcast_url}
     with open(json_filepath, 'w', encoding="utf8") as output_file:
@@ -48,8 +49,8 @@ def download_episode(podcast_url:str):
 def has_podcast_been_downloaded(podcast_url:str):
         jsons = get_files_of_type(config.TRANSCRIPT_FOLDERPATH, ".json")
         for json in jsons:
-                podcast_url = get_value_from_json(config.TRANSCRIPT_FOLDERPATH / json, "podcast_url")
-                if podcast_url == podcast_url:
+                downloaded_url = get_value_from_json(config.TRANSCRIPT_FOLDERPATH / json, "podcast_url")
+                if podcast_url == downloaded_url:
                         return True
         else:
                 return False
